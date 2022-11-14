@@ -18,14 +18,14 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class Main4 {
-    static long bar = 71244812501L;
+public class Generator1 {
+    static long bar = 1257350001L;
     private static final int COORDINATE_X = 193;
     private static final int COORDINATE_Y = 706;
 
     public static void main(String[] args) throws IOException, DocumentException {
 
-        for(int j = 1; j <= 1; j++) {
+        for(int j = 1; j <= 2; j++) {
             List<String> invalidList = new ArrayList<>();
             for (int i = 1; i <= 100; i++) {
                 invalidList = createFile(i);
@@ -47,37 +47,38 @@ public class Main4 {
         }
     }
 
-    private static ArrayList<String> createFile(/*String frontPath, String backPath*/ int j) throws IOException, DocumentException {
+    private static ArrayList<String> createFile(int j) throws IOException, DocumentException {
+        String resultPathFront = "result/" + j + "-out.pdf";
         ArrayList<String> listPath = new ArrayList<>();
 
-//     for(int j = 1; j <= 1; j++) {
-//         String resultPathFront = "result/" + j + "-out.pdf";
-         String resultPathBack = "result/" + j + "-in.pdf";
-        String path = "blanks/blank/setka.pdf";
-        PdfReader pdfReader = new PdfReader(path);
-//        PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
-        String path2 = "blanks/blank/setka.pdf";
-        PdfReader pdfReaderBack = new PdfReader(path2);
-        PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
+            String resultPathBack = "result/" + j  + "-out.pdf";
+            String path = "blanks/blank/setka.pdf";
+            PdfReader pdfReader = new PdfReader(path);
+            PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
+            String path2 = "blanks/blank/setka.pdf";
+            PdfReader pdfReaderBack = new PdfReader(path2);
+            PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
 
-        PdfContentByte backContent = back.getOverContent(1);
-//        PdfContentByte content = stamper.getOverContent(1);
-        int coordinateY = COORDINATE_Y;
-        int moveY = 163;
-        int column = 1;
+            PdfContentByte backContent = back.getOverContent(1);
+            PdfContentByte content = stamper.getOverContent(1);
+            int coordinateY = COORDINATE_Y;
+            int moveY = 163;
+            int column = 1;
 
-        for (int i = 0; i < 10; i++) {
-//            String blankFrontPath = "new3/orange-front.png";
-            String blankBackPath = "new/orange-back.png";
+            for (int i = 0; i < 10; i++) {
+//                String blankFrontPath = "newnew/front.png";
+                String blankBackPath = "newnew/green-back-0505.png";
 //            String blankFrontPath = "new/yellow-front.png";
 //            String blankBackPath = "new/yellow-back.png";
-            String barCode = Long.toString(bar);
-            bar++;
-            String editedBarCode = barCode.substring(0, 1) + " " + barCode.substring(1, 4) + " " + barCode.substring(4, 7) + " " + barCode.substring(7, 9) + " " + barCode.substring(9);
+                String barCode = Long.toString(bar);
+                bar++;
+                String editedBarCode = barCode.substring(0, 3) + " " + barCode.substring(3, 6) + " " + barCode.substring(6);
+                String iin = "980916301576";
 
-            if (column == 1) {
-//                setImage(blankFrontPath, COORDINATE_X - 159, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, backContent);
+                String editedIin = iin.substring(0, 4) + " " + iin.substring(4, 8) + " " + iin.substring(8);
+                if (column == 1) {
+//                    setImage(blankFrontPath, COORDINATE_X - 159, coordinateY - 40, content);
+                    setImage(blankBackPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, backContent);
 //                setPhoto("W-12.jpg", content, COORDINATE_X, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X - 80, coordinateY - 18, content, 10);
 //                setText(editedIin,COORDINATE_X + 33, coordinateY - 18, content, 10);
@@ -86,13 +87,13 @@ public class Main4 {
 //                setText(editedBarCode, COORDINATE_X * 2 - 4, coordinateY + 84, backContent, 16);
 
 
-                setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 38.5f, coordinateY - 33.5f, backContent);
-                setText(editedBarCode, COORDINATE_X * 2 + 110 + 2, coordinateY + 43, backContent, 16);
-                column++;
+                    setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 39.5f, coordinateY - 36f, backContent);
+                    setText(editedBarCode, COORDINATE_X * 2 + 110 + 2, coordinateY + 43, backContent, 16);
+                    column++;
 
-            } else {
-//                setImage(blankFrontPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X - 159, coordinateY - 40, backContent);
+                } else {
+//                    setImage(blankFrontPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, content);
+                    setImage(blankBackPath, COORDINATE_X - 159, coordinateY - 40, backContent);
 
 //                setPhoto("W-12.jpg", content,COORDINATE_X * 2 + 86, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X * 2 + 6, coordinateY - 18, content, 10);
@@ -101,19 +102,19 @@ public class Main4 {
 //                setBarCode(barCode, COORDINATE_X + 9, coordinateY, backContent);
 //                setText(editedBarCode, COORDINATE_X - 91, coordinateY + 84, backContent, 16);
 
-                setQRCode(barCode, COORDINATE_X + 8 + 35.9f, coordinateY - 33.6f, backContent);
-                setText(editedBarCode, COORDINATE_X + 28, coordinateY + 43, backContent, 16);
-                column = 1;
-                coordinateY -= moveY;
-            }
+                    setQRCode(barCode, COORDINATE_X + 8 + 37, coordinateY - 36f, backContent);
+                    setText(editedBarCode, COORDINATE_X + 28, coordinateY + 43, backContent, 16);
+                    column = 1;
+                    coordinateY -= moveY;
+                }
 //         }
 
-//        }
-    }
 
+
+        }
         listPath.add(resultPathBack);
         back.close();
-//        stamper.close();
+//            stamper.close();
         return  listPath;
     }
 
@@ -160,7 +161,7 @@ public class Main4 {
 
     }
 
-    private static void setImage(String path, float x, float y, PdfContentByte content) throws IOException, DocumentException {
+    private static void setImage(String path, int x, int y, PdfContentByte content) throws IOException, DocumentException {
         Image image = Image.getInstance(path);
         image.scaleAbsoluteHeight(162);
         image.scaleAbsoluteWidth(254);

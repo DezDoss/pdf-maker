@@ -50,10 +50,10 @@ public class Yarmarka {
 //        ArrayList<String> listPath = new ArrayList<>();
 //
 //        String resultPathBack = "result/" + j  + "-out.pdf";
-//        String path = "blank/setka.pdf";
+//        String path = "blanks/blank/setka.pdf";
 //        PdfReader pdfReader = new PdfReader(path);
 //        PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
-//        String path2 = "blank/setka.pdf";
+//        String path2 = "blanks/blank/setka.pdf";
 //        PdfReader pdfReaderBack = new PdfReader(path2);
 //        PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
 //
@@ -121,10 +121,10 @@ public class Yarmarka {
         ArrayList<String> listPath = new ArrayList<>();
 
         String resultPathBack = "result/" + j  + "-out.pdf";
-        String path = "blank/setka.pdf";
+        String path = "blanks/blank/setka.pdf";
         PdfReader pdfReader = new PdfReader(path);
         PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
-        String path2 = "blank/setka.pdf";
+        String path2 = "blanks/blank/setka.pdf";
         PdfReader pdfReaderBack = new PdfReader(path2);
         PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
 

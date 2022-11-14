@@ -14,12 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class Main4 {
-    static long bar = 71244812501L;
+public class Generator5 {
+    static long bar = 71247820101L;
     private static final int COORDINATE_X = 193;
     private static final int COORDINATE_Y = 706;
 
@@ -27,7 +26,8 @@ public class Main4 {
 
         for(int j = 1; j <= 1; j++) {
             List<String> invalidList = new ArrayList<>();
-            for (int i = 1; i <= 100; i++) {
+//            for (int i = 1; i <= 100; i++) {
+                for (int i = 1; i <= 1; i++) {
                 invalidList = createFile(i);
             }
             String sourceFile = "result";
@@ -52,7 +52,7 @@ public class Main4 {
 
 //     for(int j = 1; j <= 1; j++) {
 //         String resultPathFront = "result/" + j + "-out.pdf";
-         String resultPathBack = "result/" + j + "-in.pdf";
+        String resultPathBack = "result/" + j + "-out.pdf";
         String path = "blanks/blank/setka.pdf";
         PdfReader pdfReader = new PdfReader(path);
 //        PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
@@ -68,16 +68,18 @@ public class Main4 {
 
         for (int i = 0; i < 10; i++) {
 //            String blankFrontPath = "new3/orange-front.png";
-            String blankBackPath = "new/orange-back.png";
+            String blankBackPath = "new/blue-front.png";
 //            String blankFrontPath = "new/yellow-front.png";
 //            String blankBackPath = "new/yellow-back.png";
             String barCode = Long.toString(bar);
             bar++;
-            String editedBarCode = barCode.substring(0, 1) + " " + barCode.substring(1, 4) + " " + barCode.substring(4, 7) + " " + barCode.substring(7, 9) + " " + barCode.substring(9);
+            String editedBarCode = barCode.substring(0, 1) + " " + barCode.substring(1, 4) + " " + barCode.substring(4, 7) + " " + barCode.substring(7);
+            String iin = "980916301576";
 
+            String editedIin = iin.substring(0, 4) + " " + iin.substring(4, 8) + " " + iin.substring(8);
             if (column == 1) {
 //                setImage(blankFrontPath, COORDINATE_X - 159, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, backContent);
+                setImage(blankBackPath, COORDINATE_X * 2 + 86 - 158, coordinateY - 42.5f, backContent);
 //                setPhoto("W-12.jpg", content, COORDINATE_X, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X - 80, coordinateY - 18, content, 10);
 //                setText(editedIin,COORDINATE_X + 33, coordinateY - 18, content, 10);
@@ -86,13 +88,13 @@ public class Main4 {
 //                setText(editedBarCode, COORDINATE_X * 2 - 4, coordinateY + 84, backContent, 16);
 
 
-                setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 38.5f, coordinateY - 33.5f, backContent);
-                setText(editedBarCode, COORDINATE_X * 2 + 110 + 2, coordinateY + 43, backContent, 16);
+//                setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 40, coordinateY - 35.5f, backContent);
+//                setText(editedBarCode, COORDINATE_X * 2 + 110 + 2, coordinateY + 43, backContent, 16);
                 column++;
 
             } else {
 //                setImage(blankFrontPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X - 159, coordinateY - 40, backContent);
+                setImage(blankBackPath, COORDINATE_X - 157, coordinateY - 42.5f, backContent);
 
 //                setPhoto("W-12.jpg", content,COORDINATE_X * 2 + 86, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X * 2 + 6, coordinateY - 18, content, 10);
@@ -101,15 +103,15 @@ public class Main4 {
 //                setBarCode(barCode, COORDINATE_X + 9, coordinateY, backContent);
 //                setText(editedBarCode, COORDINATE_X - 91, coordinateY + 84, backContent, 16);
 
-                setQRCode(barCode, COORDINATE_X + 8 + 35.9f, coordinateY - 33.6f, backContent);
-                setText(editedBarCode, COORDINATE_X + 28, coordinateY + 43, backContent, 16);
+//                setQRCode(barCode, COORDINATE_X + 8 + 37, coordinateY - 35.5f, backContent);
+//                setText(editedBarCode, COORDINATE_X + 28, coordinateY + 43, backContent, 16);
                 column = 1;
                 coordinateY -= moveY;
             }
 //         }
 
 //        }
-    }
+        }
 
         listPath.add(resultPathBack);
         back.close();

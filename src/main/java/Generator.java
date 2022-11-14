@@ -1,83 +1,76 @@
-import com.itextpdf.text.*;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.*;
-import com.itextpdf.text.pdf.qrcode.EncodeHintType;
 
-import javax.imageio.ImageIO;
-import javax.swing.text.StyleConstants;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class Main4 {
-    static long bar = 71244812501L;
+public class Generator {
+    static long bar = 10001L;
     private static final int COORDINATE_X = 193;
     private static final int COORDINATE_Y = 706;
 
     public static void main(String[] args) throws IOException, DocumentException {
 
-        for(int j = 1; j <= 1; j++) {
-            List<String> invalidList = new ArrayList<>();
-            for (int i = 1; i <= 100; i++) {
-                invalidList = createFile(i);
-            }
-            String sourceFile = "result";
-            FileOutputStream fos = new FileOutputStream("zip/" + j + "dirCompressed.zip");
-            ZipOutputStream zipOut = new ZipOutputStream(fos);
-            File fileToZip = new File(sourceFile);
+        ArrayList<String> invalidList = new ArrayList<>();
+        for (int i = 1; i <= 1; i++) {
+             invalidList.addAll(createFile(i));
+        }
+        String sourceFile = "result";
+        FileOutputStream fos = new FileOutputStream("zip/dirCompressed.zip");
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        File fileToZip = new File(sourceFile);
 
 
-            zipFile(fileToZip, fileToZip.getName(), zipOut);
-            zipOut.close();
-            fos.close();
+        zipFile(fileToZip, fileToZip.getName(), zipOut);
+        zipOut.close();
+        fos.close();
 
-            for (String str : invalidList) {
-                File file = new File(str);
-                file.deleteOnExit();
-            }
+        for(String str : invalidList) {
+            File file = new File(str);
+            file.deleteOnExit();
         }
     }
 
-    private static ArrayList<String> createFile(/*String frontPath, String backPath*/ int j) throws IOException, DocumentException {
+    private static ArrayList<String> createFile(int j) throws IOException, DocumentException {
+        String resultPathFront = "result/" + j + "-out.pdf";
         ArrayList<String> listPath = new ArrayList<>();
 
-//     for(int j = 1; j <= 1; j++) {
-//         String resultPathFront = "result/" + j + "-out.pdf";
-         String resultPathBack = "result/" + j + "-in.pdf";
-        String path = "blanks/blank/setka.pdf";
-        PdfReader pdfReader = new PdfReader(path);
-//        PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
-        String path2 = "blanks/blank/setka.pdf";
-        PdfReader pdfReaderBack = new PdfReader(path2);
-        PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
+            String resultPathBack = "result/" + j  + "-out.pdf";
+            String path = "blanks/blank/setka.pdf";
+            PdfReader pdfReader = new PdfReader(path);
+            PdfStamper stamper = new PdfStamper(pdfReader, new FileOutputStream(resultPathFront));
+            String path2 = "blanks/blank/setka.pdf";
+            PdfReader pdfReaderBack = new PdfReader(path2);
+            PdfStamper back = new PdfStamper(pdfReaderBack, new FileOutputStream(resultPathBack));
 
-        PdfContentByte backContent = back.getOverContent(1);
-//        PdfContentByte content = stamper.getOverContent(1);
-        int coordinateY = COORDINATE_Y;
-        int moveY = 163;
-        int column = 1;
+            PdfContentByte backContent = back.getOverContent(1);
+            PdfContentByte content = stamper.getOverContent(1);
+            int coordinateY = COORDINATE_Y;
+            int moveY = 163;
+            int column = 1;
 
-        for (int i = 0; i < 10; i++) {
-//            String blankFrontPath = "new3/orange-front.png";
-            String blankBackPath = "new/orange-back.png";
+            for (int i = 0; i < 10; i++) {
+//                String blankFrontPath = "newnew/front.png";
+                String blankBackPath = "controller/semey-back.png";
 //            String blankFrontPath = "new/yellow-front.png";
 //            String blankBackPath = "new/yellow-back.png";
-            String barCode = Long.toString(bar);
-            bar++;
-            String editedBarCode = barCode.substring(0, 1) + " " + barCode.substring(1, 4) + " " + barCode.substring(4, 7) + " " + barCode.substring(7, 9) + " " + barCode.substring(9);
+                String barCode = Long.toString(bar);
+                bar++;
+                String editedBarCode = barCode.substring(1, 3) + " " + barCode.substring(3);
+                String iin = "980916301576";
 
-            if (column == 1) {
-//                setImage(blankFrontPath, COORDINATE_X - 159, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, backContent);
+                String editedIin = iin.substring(0, 4) + " " + iin.substring(4, 8) + " " + iin.substring(8);
+                if (column == 1) {
+//                    setImage(blankFrontPath, COORDINATE_X - 159, coordinateY - 40, content);
+                    setImage(blankBackPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, backContent);
 //                setPhoto("W-12.jpg", content, COORDINATE_X, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X - 80, coordinateY - 18, content, 10);
 //                setText(editedIin,COORDINATE_X + 33, coordinateY - 18, content, 10);
@@ -86,13 +79,13 @@ public class Main4 {
 //                setText(editedBarCode, COORDINATE_X * 2 - 4, coordinateY + 84, backContent, 16);
 
 
-                setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 38.5f, coordinateY - 33.5f, backContent);
-                setText(editedBarCode, COORDINATE_X * 2 + 110 + 2, coordinateY + 43, backContent, 16);
-                column++;
+//                    setQRCode(barCode, COORDINATE_X * 2 + 86 + 4 + 40, coordinateY - 36f, backContent);
+//                    setText(editedBarCode, COORDINATE_X * 2 - 43, coordinateY + 88, backContent, 16);
+                    column++;
 
-            } else {
-//                setImage(blankFrontPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, content);
-                setImage(blankBackPath, COORDINATE_X - 159, coordinateY - 40, backContent);
+                } else {
+//                    setImage(blankFrontPath, COORDINATE_X * 2 + 86 - 160, coordinateY - 40, content);
+                    setImage(blankBackPath, COORDINATE_X - 159, coordinateY - 40, backContent);
 
 //                setPhoto("W-12.jpg", content,COORDINATE_X * 2 + 86, coordinateY);
 //                setText("Антон Павлович", COORDINATE_X * 2 + 6, coordinateY - 18, content, 10);
@@ -101,25 +94,26 @@ public class Main4 {
 //                setBarCode(barCode, COORDINATE_X + 9, coordinateY, backContent);
 //                setText(editedBarCode, COORDINATE_X - 91, coordinateY + 84, backContent, 16);
 
-                setQRCode(barCode, COORDINATE_X + 8 + 35.9f, coordinateY - 33.6f, backContent);
-                setText(editedBarCode, COORDINATE_X + 28, coordinateY + 43, backContent, 16);
-                column = 1;
-                coordinateY -= moveY;
-            }
+//                    setQRCode(barCode, COORDINATE_X + 8 + 37, coordinateY - 36f, backContent);
+//                    setText(editedBarCode, COORDINATE_X - 128, coordinateY + 88, backContent, 16);
+                    column = 1;
+                    coordinateY -= moveY;
+                }
 //         }
 
-//        }
-    }
 
+
+        }
         listPath.add(resultPathBack);
         back.close();
-//        stamper.close();
+//            stamper.close();
         return  listPath;
     }
 
     private static void setText(String text, float x, float y, PdfContentByte content, int fontSize) throws IOException, DocumentException {
         BaseFont bfComic = BaseFont.createFont("Roboto-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         content.setFontAndSize(bfComic, fontSize);
+        content.setColorFill(BaseColor.WHITE);
         content.beginText();
 //        content.showTextAligned(Element.ALIGN_CENTER, text, x, y, 0f);
         content.showTextAligned(Element.ALIGN_CENTER, text, x, y, 270f);
@@ -127,7 +121,7 @@ public class Main4 {
         content.stroke();
     }
 
-    private static void setQRCode(String barCode, float x, float y, PdfContentByte content) throws DocumentException {
+    private static void setQRCode(String barCode, int x, float y, PdfContentByte content) throws DocumentException {
         BarcodeQRCode barcodeQRCode = new BarcodeQRCode(barCode, 1000, 1000, null);
         Image codeQrImage = barcodeQRCode.getImage();
         Image mask = barcodeQRCode.getImage();
@@ -160,7 +154,7 @@ public class Main4 {
 
     }
 
-    private static void setImage(String path, float x, float y, PdfContentByte content) throws IOException, DocumentException {
+    private static void setImage(String path, int x, int y, PdfContentByte content) throws IOException, DocumentException {
         Image image = Image.getInstance(path);
         image.scaleAbsoluteHeight(162);
         image.scaleAbsoluteWidth(254);
